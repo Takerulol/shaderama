@@ -4,26 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-
-
 
 public class Mesh extends Node {
 
 	private static final long serialVersionUID = 2071873898138598638L;
+
+	public static final int TRIAGLES  	= 0x01;
+	public static final int QUADS 		= 0x02;
 	
 	private int id = -1;
-	private List<Integer> indices = new ArrayList<>();
-	private List<Vector3f> vertices = new ArrayList<>();
+	private int type = -1;
+	private List<Face> indices = new ArrayList<>();
+	public List<Vector3f> vertices = new ArrayList<>();
 	private List<Vector3f> normals = new ArrayList<>();
+	private List<Vector2f> texCoords = new ArrayList<>();
+	
+	public Mesh() {}
 
 	private Matrix4f prMatrix = new Matrix4f();
 	
-	public List<Integer> getIndices() {
+	public List<Face> getIndices() {
 		return indices;
 	}
 
-	public void setIndices(List<Integer> indices) {
+	public void setIndices(List<Face> indices) {
 		this.indices = indices;
 	}
 
@@ -50,42 +56,25 @@ public class Mesh extends Node {
 	public void setPrMatrix(Matrix4f prMatrix) {
 		this.prMatrix = prMatrix;
 	}
-
-	
-	public Mesh() {}
 	
 	public boolean isLoaded() {
 		return id > -1 ? true : false; 
 	}
-	
-	public class Face {
-		
-		private Vector3f vertexIndices;
-		private Vector3f normalIndices;
-		
-		public Face(Vector3f vertexIndices, Vector3f normalIndices) {
-			this.setVertexIndices(vertexIndices);
-			this.setNormalIndices(normalIndices);
-		}
 
-		public Vector3f getVertexIndices() {
-			return vertexIndices;
-		}
+	public List<Vector2f> getTexCoords() {
+		return texCoords;
+	}
 
-		public void setVertexIndices(Vector3f vertexIndices) {
-			this.vertexIndices = vertexIndices;
-		}
+	public void setTexCoords(List<Vector2f> texCoords) {
+		this.texCoords = texCoords;
+	}
 
-		public Vector3f getNormalIndices() {
-			return normalIndices;
-		}
+	public int getType() {
+		return type;
+	}
 
-		public void setNormalIndices(Vector3f normalIndices) {
-			this.normalIndices = normalIndices;
-		}
-		
-		
+	public void setType(int type) {
+		this.type = type;
 	}
 	
-
 }
