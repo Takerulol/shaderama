@@ -3,6 +3,7 @@ package edu.hsbremen.cb.shaderama.renderer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -39,14 +40,21 @@ public class LWJGLRenderer implements Renderer {
 			glBegin(type);
 				for(Face f : mesh.getIndices()) {
 					for(int i = 0; i < mesh.getType(); i++) {
-						System.out.println(mesh.getNormals().size()+" "+mesh.getVertices().size()+" ["+(f.getVertexIndices()[i]-1)+"] "+mesh.getIndices().size());
+//						System.out.println(mesh.getNormals().size()+" "+mesh.getVertices().size()+" ["+(f.getVertexIndices()[i]-1)+"] "+mesh.getIndices().size());
 						Vector3f v = mesh.getVertices().get(f.getVertexIndices()[i]-1);
-						Vector3f n = mesh.getNormals().get(f.getNormalIndices()[i]-1);
-						Vector2f t = mesh.getTexCoords().get(f.getTextureCoords()[i]-1);
-						System.out.println("["+k+++"] vx "+v.x+" vy "+v.y+" vz "+v.z+" nx "+n.x+" ny "+n.y+" nz "+n.z+" tx "+t.x+" ty "+t.y);
+						if(f.getNormalIndices()[i] != 0) {
+							Vector3f n = mesh.getNormals().get(f.getNormalIndices()[i]-1);
+							glNormal3f(n.x, n.y, n.z);
+						} else {
+							//TODO: calculate normals
+						}
 						
-						glNormal3f(n.x, n.y, n.z);
-						glTexCoord2f(t.x, t.y);
+						if(f.getTextureCoords()[i] != 0) {
+							Vector2f t = mesh.getTexCoords().get(f.getTextureCoords()[i]-1);
+							glTexCoord2f(t.x, t.y);
+						}
+						
+//						System.out.println("["+k+++"] vx "+v.x+" vy "+v.y+" vz "+v.z+" nx "+n.x+" ny "+n.y+" nz "+n.z+" tx "+t.x+" ty "+t.y);
 						glVertex3f(v.x, v.y, v.z);
 					}
 				}
@@ -91,7 +99,22 @@ public class LWJGLRenderer implements Renderer {
 
 	@Override
 	public void initContext() {
+//		glClearColor(0, 0, 0, 1);
+//		glClear(GL_COLOR_BUFFER_BIT);
+		glViewport(0, 0, 800, 600);
+//		glEnable(GL_NORMALIZE);
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc( GL_LESS);
+		depthTest = true;
+		glMatrixMode( GL_PROJECTION);
+		glLoadIdentity();
+		GLU.gluPerspective(60, 1, 2, 20);
+		glTranslatef(0, 0, -10);
+//		GLU.gluOrtho2D(0, 800, 0, 600);
+		glMatrixMode( GL_MODELVIEW);
+		
 		glClearColor(0, 0, 0, 1);
+		
 		
 	}
 

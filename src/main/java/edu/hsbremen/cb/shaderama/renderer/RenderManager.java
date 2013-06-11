@@ -30,7 +30,7 @@ public class RenderManager extends Manager {
 		renderer.initContext();
 		try {
 			ResourceLoader r = new ResourceLoader();
-			addNode(ObjLoader.load(r.getResource("/model/scene.obj")));
+			addNode(ObjLoader.load(r.getResource("model/zen_gold.obj")));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -80,8 +80,8 @@ public class ObjLoader {
 		for (int i = 0; i < size; i++) {
 			temp = s[i+1].split("/");
 			vertexIndices[i] = Integer.valueOf(temp[0]);
-			textureCoords[i] = Integer.valueOf(temp[1]);
-			normalIndices[i] = Integer.valueOf(temp[2]);
+			if(temp.length > 1) textureCoords[i] = Integer.valueOf(temp[1]);
+			if(temp.length > 2) normalIndices[i] = Integer.valueOf(temp[2]);
 		}
 		
 		m.addFace(vertexIndices, normalIndices, textureCoords);

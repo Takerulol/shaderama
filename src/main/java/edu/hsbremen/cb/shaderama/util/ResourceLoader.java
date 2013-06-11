@@ -10,7 +10,7 @@ public class ResourceLoader  {
 	public ResourceLoader() {}
 	
 	public File getResource(String path) {
-		URL url = ResourceLoader.class.getClassLoader().getResource("model/scene.obj");
+		URL url = ResourceLoader.class.getClassLoader().getResource(path);
 		File f = new File(url.getPath());
 		return f;
 	}
