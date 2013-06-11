@@ -3,8 +3,12 @@ package edu.hsbremen.cb.shaderama.renderer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
 import static org.lwjgl.opengl.GL11.*;
 
+import edu.hsbremen.cb.shaderama.scene.Face;
 import edu.hsbremen.cb.shaderama.scene.Mesh;
 
 public class LWJGLRenderer implements Renderer {
@@ -13,20 +17,50 @@ public class LWJGLRenderer implements Renderer {
 
 	@Override
 	public void draw(Mesh mesh) {
-		// TODO Auto-generated method stub
-		
+		if(mesh.isLoaded()) glCallList(mesh.getId());
 	}
 
 	@Override
 	public void loadMesh(Mesh mesh) {
-		// TODO Auto-generated method stub
-		
+		if(!mesh.isLoaded()) load(mesh);
+	}
+
+	private void load(Mesh mesh) {
+		int list = glGenLists(1);
+		glNewList(list, GL_COMPILE);
+			int type;
+			if (mesh.getType() == Mesh.TRIAGLES)
+				type = GL_TRIANGLES;
+			else if (mesh.getType() == Mesh.QUADS)
+				type = GL_QUADS;
+			else
+				throw new RuntimeException("critical error, no typ given -> someone hacked some shit in");
+			int k = 0;
+			glBegin(type);
+				for(Face f : mesh.getIndices()) {
+					for(int i = 0; i < mesh.getType(); i++) {
+						System.out.println(mesh.getNormals().size()+" "+mesh.getVertices().size()+" ["+(f.getVertexIndices()[i]-1)+"] "+mesh.getIndices().size());
+						Vector3f v = mesh.getVertices().get(f.getVertexIndices()[i]-1);
+						Vector3f n = mesh.getNormals().get(f.getNormalIndices()[i]-1);
+						Vector2f t = mesh.getTexCoords().get(f.getTextureCoords()[i]-1);
+						System.out.println("["+k+++"] vx "+v.x+" vy "+v.y+" vz "+v.z+" nx "+n.x+" ny "+n.y+" nz "+n.z+" tx "+t.x+" ty "+t.y);
+						
+						glNormal3f(n.x, n.y, n.z);
+						glTexCoord2f(t.x, t.y);
+						glVertex3f(v.x, v.y, v.z);
+					}
+				}
+			glEnd();
+		glEndList();
+		mesh.setId(list);
 	}
 
 	@Override
 	public void unloadMesh(Mesh mesh) {
-		// TODO Auto-generated method stub
-		
+		if(mesh.isLoaded()) {
+			glDeleteLists(mesh.getId(), 1);
+			mesh.setId(-1);
+		}
 	}
 
 	@Override

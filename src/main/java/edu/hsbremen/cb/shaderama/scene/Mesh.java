@@ -7,12 +7,14 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import edu.hsbremen.cb.shaderama.renderer.Renderer;
+
 public class Mesh extends Node {
 
 	private static final long serialVersionUID = 2071873898138598638L;
 
-	public static final int TRIAGLES  	= 0x01;
-	public static final int QUADS 		= 0x02;
+	public static final int TRIAGLES  	= 0x03;
+	public static final int QUADS 		= 0x04;
 	
 	private int id = -1;
 	private int type = -1;
@@ -24,6 +26,9 @@ public class Mesh extends Node {
 	public Mesh() {}
 
 	private Matrix4f prMatrix = new Matrix4f();
+
+	//TODO: implement visibility
+	private boolean visible = true;
 	
 	public List<Face> getIndices() {
 		return indices;
@@ -58,7 +63,7 @@ public class Mesh extends Node {
 	}
 	
 	public boolean isLoaded() {
-		return id > -1 ? true : false; 
+		return getId() > -1 ? true : false; 
 	}
 
 	public List<Vector2f> getTexCoords() {
@@ -75,6 +80,20 @@ public class Mesh extends Node {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Override
+	public void render(Renderer renderer) {
+		if (visible) renderer.draw(this);
+		super.render(renderer);
 	}
 	
 }

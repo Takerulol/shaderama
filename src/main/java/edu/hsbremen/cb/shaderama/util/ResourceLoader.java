@@ -5,8 +5,6 @@ import java.net.URL;
 
 public class ResourceLoader  {
 
-	private Loader loader = new Loader();
-	
 	//TODO: actual resource handling
 	
 	public ResourceLoader() {}
@@ -17,7 +15,4 @@ public class ResourceLoader  {
 		return f;
 	}
 	
-	private class Loader extends ClassLoader {
-		
-	}
 }

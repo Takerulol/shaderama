@@ -1,6 +1,11 @@
 package edu.hsbremen.cb.shaderama;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import edu.hsbremen.cb.shaderama.core.Core;
+import edu.hsbremen.cb.shaderama.util.ObjLoader;
+import edu.hsbremen.cb.shaderama.util.ResourceLoader;
 
 public final class Main {
 
@@ -11,6 +16,7 @@ public final class Main {
 		System.out.println("initial app!");
 		Core core = new Core("lwjgl");
 		core.start();
+
 		//TODO: fill in models/shaders
 	}
 
