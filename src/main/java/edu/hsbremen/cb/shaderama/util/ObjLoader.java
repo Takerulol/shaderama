@@ -74,7 +74,7 @@ public class ObjLoader {
 	private static void addFace(String[] s, MeshBuilder m) {
 		int size = s.length - 1;
 		int[] vertexIndices		= new int[size];
-		int[] textureCoords	= new int[size];
+		int[] textureCoords		= new int[size];
 		int[] normalIndices		= new int[size];
 		String[] temp;
 		for (int i = 0; i < size; i++) {

@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import edu.hsbremen.cb.shaderama.renderer.Renderer;
+import edu.hsbremen.cb.shaderama.shader.Shader;
 
 public class Mesh extends Node {
 
@@ -29,6 +30,8 @@ public class Mesh extends Node {
 
 	//TODO: implement visibility
 	private boolean visible = true;
+
+	private Shader shader;
 	
 	public List<Face> getIndices() {
 		return indices;
@@ -94,6 +97,14 @@ public class Mesh extends Node {
 	public void render(Renderer renderer) {
 		if (visible) renderer.draw(this);
 		super.render(renderer);
+	}
+
+	public boolean hasShader() {
+		return shader != null;
+	}
+
+	public Shader getShader() {
+		return shader;
 	}
 	
 }
