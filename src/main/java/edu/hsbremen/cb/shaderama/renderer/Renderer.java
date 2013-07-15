@@ -10,14 +10,15 @@ public interface Renderer {
 	void loadMesh(Mesh mesh);
 	void unloadMesh(Mesh mesh);
 	
-	//camera
+	//camera/view
 	void positionCamera(Camera camera);
+	void createPerspective();
+	void createOrtho();
 	
 	//shader stuff
 	void loadShader(Shader shader);
 	void unloadShader(Shader shader);
 	void useShader(Shader shader);
-	void unuseShader(Shader shader);
 	
 	//display stuff
 	void update(int maxfps);
@@ -25,12 +26,10 @@ public interface Renderer {
 	void createWindow(int width, int height);
 	boolean isCloseRequested();
 	void initContext();
-	void createPerspective();
-	void createOrtho();
-	
+
 	//settings
 	void setDepthTest(boolean test);
+	
+	//random stuff
 	void lightDrive();
-	
-	
 }

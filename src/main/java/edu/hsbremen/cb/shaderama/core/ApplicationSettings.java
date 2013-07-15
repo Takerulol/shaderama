@@ -3,6 +3,9 @@ package edu.hsbremen.cb.shaderama.core;
 import org.lwjgl.input.Keyboard;
 
 public class ApplicationSettings {
+	
+	public String app_name = "Shaderama - Christian Bollmann";
+	
 	//rendersettings
 	public int r_width = 800;
 	public int r_height = 600;

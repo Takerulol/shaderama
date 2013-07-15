@@ -129,6 +129,7 @@ public class LWJGLRenderer implements Renderer {
 	public void createWindow(int width, int height) {
 		try {
 			Display.setDisplayMode(new DisplayMode(width, height));
+			Display.setTitle(settings.app_name);
 			Display.create();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -248,12 +249,6 @@ public class LWJGLRenderer implements Renderer {
 
 	@Override
 	public void useShader(Shader shader) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unuseShader(Shader shader) {
 		// TODO Auto-generated method stub
 		
 	}
