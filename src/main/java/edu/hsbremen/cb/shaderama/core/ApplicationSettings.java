@@ -24,7 +24,7 @@ public class ApplicationSettings {
 	public float m_turnSpeed = 10;
 	public float m_pitch = 0.05f;
 	public float m_yaw = 0.08f;
-	
+	public float sensitivity = 2f;
 	
 	//keys
 	public int k_forward = Keyboard.KEY_W;
@@ -33,4 +33,5 @@ public class ApplicationSettings {
 	public int k_backward = Keyboard.KEY_S;
 	public int k_up = Keyboard.KEY_SPACE;
 	public int k_down = Keyboard.KEY_X;
+
 }

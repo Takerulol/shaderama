@@ -74,8 +74,8 @@ public class InputManager extends Manager {
 //				rotationDelta.x += dy1 * settings.m_pitch;
 //			}
 			
-			rotationDelta.x += (float)(tempY - Mouse.getY()) * settings.m_pitch;
-			rotationDelta.y += (float)(tempX - Mouse.getX()) * settings.m_yaw;
+			rotationDelta.x -= (float)(tempY - Mouse.getY()) * settings.m_pitch * settings.sensitivity;
+			rotationDelta.y += (float)(tempX - Mouse.getX()) * settings.m_yaw * settings.sensitivity;
 			tempX = Mouse.getX();
 			tempY = Mouse.getY();
 		}
