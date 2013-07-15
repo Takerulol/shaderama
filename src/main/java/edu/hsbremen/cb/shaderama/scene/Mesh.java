@@ -95,8 +95,14 @@ public class Mesh extends Node {
 	
 	@Override
 	public void render(Renderer renderer) {
-		if (visible) renderer.draw(this);
+		if (visible) {
+			renderer.draw(this);
+		}
 		super.render(renderer);
+	}
+	
+	public void setShader(Shader shader) {
+		this.shader = shader;
 	}
 
 	public boolean hasShader() {

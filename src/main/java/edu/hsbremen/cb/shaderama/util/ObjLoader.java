@@ -29,10 +29,9 @@ public class ObjLoader {
 		
 		String line;
 		int type = -1;
-		
+
 		m.startMesh();
 		while((line = reader.readLine()) != null) {
-			
 			//remove additional whitespaces that would conflict reading the line
 			line = line.trim().replaceAll(" +", " ");
 			

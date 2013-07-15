@@ -18,15 +18,25 @@ public class Core {
 		renderEngine.toLowerCase();
 		Renderer renderer;
 		switch (renderEngine) {
-			case "lwjgl": renderer = new LWJGLRenderer(); break;
-			default: renderer = new LWJGLRenderer();
+			case "lwjgl": renderer = new LWJGLRenderer(settings); break;
+			default: renderer = new LWJGLRenderer(settings);
 		}
-		this.rm = new RenderManager(this,settings,renderer);
+
 		this.im = new InputManager(this,settings);
+		this.rm = new RenderManager(this,settings,renderer,this.im);
+		
 	}
 	
 	public void start() {
 		rm.start();
+		while(!rm.isLoaded()) { 
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		im.start();
 	}
 

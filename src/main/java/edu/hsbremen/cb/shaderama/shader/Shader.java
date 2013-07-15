@@ -8,6 +8,7 @@ public class Shader {
 	private int vertexShaderProgram = -1;
 	private int fragmentShaderProgram = -1;
 	private int shaderProgram = -1;
+	
 	public String getVertexShaderSource() {
 		return vertexShaderSource;
 	}

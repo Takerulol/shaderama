@@ -32,8 +32,7 @@ public class ObjectTest {
 	public void testLoading() {
 		Mesh m;
 		try {
-			ResourceLoader r = new ResourceLoader();
-			File f = r.getResource("/model/scene.obj");
+			File f = ResourceLoader.getResource("/model/scene.obj");
 			assertTrue(f.exists());
 			m = ObjLoader.load(f);
 			assertTrue(m.getVertices().size() > 0);

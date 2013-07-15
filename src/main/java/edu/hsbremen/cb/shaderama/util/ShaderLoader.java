@@ -53,7 +53,8 @@ public class ShaderLoader {
                 }
             }
         }
-	
+        shader.setVertexShaderSource(vertexShaderSource.toString());
+        shader.setFragmentShaderSource(fragmentShaderSource.toString());
 		return shader;
 	}
 }
