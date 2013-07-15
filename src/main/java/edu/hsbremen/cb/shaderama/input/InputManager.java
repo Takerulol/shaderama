@@ -76,6 +76,8 @@ public class InputManager extends Manager {
 			
 			rotationDelta.x += (float)(tempY - Mouse.getY()) * settings.m_pitch;
 			rotationDelta.y += (float)(tempX - Mouse.getX()) * settings.m_yaw;
+			tempX = Mouse.getX();
+			tempY = Mouse.getY();
 		}
 		if(!Mouse.isButtonDown(0)) {
 			mouseMove = false;

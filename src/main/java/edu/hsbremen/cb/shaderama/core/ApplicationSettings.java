@@ -16,8 +16,8 @@ public class ApplicationSettings {
 	
 	//mouse
 	public float m_turnSpeed = 10;
-	public float m_pitch = 0.002f;
-	public float m_yaw = 0.003f;
+	public float m_pitch = 0.05f;
+	public float m_yaw = 0.08f;
 	
 	
 	//keys
