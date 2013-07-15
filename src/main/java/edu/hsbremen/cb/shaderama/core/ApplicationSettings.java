@@ -30,8 +30,9 @@ public class ApplicationSettings {
 	public int k_forward = Keyboard.KEY_W;
 	public int k_leftstrafe = Keyboard.KEY_A;
 	public int k_rightstrafe = Keyboard.KEY_D;
-	public int k_backward = Keyboard.KEY_S;
 	public int k_up = Keyboard.KEY_SPACE;
+	public int k_backward = Keyboard.KEY_S;
+
 	public int k_down = Keyboard.KEY_X;
 
 }
