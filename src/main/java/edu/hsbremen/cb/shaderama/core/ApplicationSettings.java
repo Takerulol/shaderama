@@ -3,13 +3,16 @@ package edu.hsbremen.cb.shaderama.core;
 import org.lwjgl.input.Keyboard;
 
 public class ApplicationSettings {
+	//rendersettings
 	public int r_width = 800;
 	public int r_height = 600;
 	public float r_aspectRatio = r_width / r_height;
-	
 	public int r_maxfps = 60;
+	public boolean r_lighting = true;
+	public boolean r_useshader = true;
 	
-	public int in_maxticks = 30;
+	//input
+	public int in_refreshrate = 60;
 	
 	//movement
 	public float c_movementSpeed = 10;
@@ -27,5 +30,4 @@ public class ApplicationSettings {
 	public int k_backward = Keyboard.KEY_S;
 	public int k_up = Keyboard.KEY_SPACE;
 	public int k_down = Keyboard.KEY_X;
-	
 }

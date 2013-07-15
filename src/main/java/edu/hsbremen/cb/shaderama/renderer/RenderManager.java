@@ -67,6 +67,11 @@ public class RenderManager extends Manager {
 		Vector3f rotationDelta = this.im.nextRotationDelta();
 		this.camera.rotate(rotationDelta.x, 1, 0, 0);
 		this.camera.rotate(rotationDelta.y, 0, 1, 0);
+		
+		if(renderer.isCloseRequested()) {
+			this.im.close();
+			this.close();
+		}
 	}
 
 	public boolean isLoaded() {

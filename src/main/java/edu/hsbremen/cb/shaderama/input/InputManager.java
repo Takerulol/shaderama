@@ -35,7 +35,7 @@ public class InputManager extends Manager {
 	public void run() {
 		System.out.println("Starting Input Manager.");
 		
-		int skipTime = 1000 / settings.in_maxticks;
+		int skipTime = 1000 / settings.in_refreshrate;
 		while(running) {
 			long before = System.currentTimeMillis();
 			getKeyEvents();
@@ -97,6 +97,8 @@ public class InputManager extends Manager {
 
 	private void handleKeys() {
 		synchronized (keyLock) {
+			//TODO: bewegung auf blickrichtung anpassen
+			
 			float moveSpeed = 1f / settings.c_movementSpeed;
 			if(keyList[settings.k_forward]) {
 				moveDelta.z += moveSpeed;

@@ -28,22 +28,18 @@ public class LWJGLRenderer implements Renderer {
 
 	private ApplicationSettings settings;
 	private boolean depthTest;
-	private float count;
-	private boolean lightDir;
 	
 	public LWJGLRenderer(ApplicationSettings settings) {
 		this.settings = settings;
 	}
-	
-	
 
 	@Override
 	public void draw(Mesh mesh) {
 		if (mesh.isLoaded()) {
-			if (mesh.hasShader())
+			if (mesh.hasShader() && settings.r_useshader)
 				glUseProgram(mesh.getShader().getShaderProgram());
 			glCallList(mesh.getId());
-			if (mesh.hasShader())
+			if (mesh.hasShader() && settings.r_useshader)
 				glUseProgram(0);
 		}
 	}
@@ -150,7 +146,7 @@ public class LWJGLRenderer implements Renderer {
 		glDepthFunc(GL_LESS);
 		depthTest = true;
 		createPerspective();
-		glEnable(GL_LIGHTING);
+		if (settings.r_lighting) glEnable(GL_LIGHTING);
 		float[] direction = { 2.0f, 2.0f, 4.0f, 1f};
 
 		FloatBuffer position = BufferUtils.createFloatBuffer(4);
@@ -176,7 +172,7 @@ public class LWJGLRenderer implements Renderer {
 	public void createPerspective() {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		GLU.gluPerspective(60, (float)settings.r_width / (float)settings.r_height, 0.1f, 50f);
+		GLU.gluPerspective(60, settings.r_aspectRatio, 0.1f, 50f);
 		glMatrixMode(GL_MODELVIEW);
 	}
 	
@@ -194,16 +190,17 @@ public class LWJGLRenderer implements Renderer {
 		this.depthTest = test;
 	}
 	
+	/**
+	 * Light movement. Remove from Renderer code later.
+	 */
+	private float count;
+	private float lightDir = 1;
 	@Override
 	public void lightDrive() {
 		float[] direction = { -10f + count * 0.01f, 2.0f, 4.0f, 1f};
-		if(lightDir) {
-			count++;
-			if(count > 1000) lightDir = !lightDir;
-		} else {
-			count--;
-			if(count < 0) lightDir = !lightDir;
-		}
+		count += lightDir;
+		if(count > 1000 || count < 0) lightDir = -lightDir;
+		
 		
 		FloatBuffer position = BufferUtils.createFloatBuffer(4);
 		position.put(direction);
@@ -266,18 +263,21 @@ public class LWJGLRenderer implements Renderer {
 		glMatrixMode(GL_PROJECTION);
 //		Vector3f pos = camera.nextDeltaPosition();
 //		Vector3f rot = camera.nextDeltaRotation();
-		
 		Vector3f pos = camera.getPosition();
 		Vector3f rot = camera.getRotation();
-		glTranslatef(pos.x, pos.y, pos.z);
+		
 		glRotatef(rot.x, 1, 0, 0);
 		glRotatef(rot.y, 0, 1, 0);
 		
 		glRotatef(0, 0, 0, 0); //TODO: wäre neigung der camera.
+		glTranslatef(-pos.x, pos.y, -pos.z);
 		glMatrixMode(GL_MODELVIEW);
 	}
 	
-	
+	@Override
+	public boolean isCloseRequested() {
+		return Display.isCloseRequested();
+	}
 	
 	
 	

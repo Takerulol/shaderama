@@ -23,6 +23,7 @@ public interface Renderer {
 	void update(int maxfps);
 	void clear();
 	void createWindow(int width, int height);
+	boolean isCloseRequested();
 	void initContext();
 	void createPerspective();
 	void createOrtho();
