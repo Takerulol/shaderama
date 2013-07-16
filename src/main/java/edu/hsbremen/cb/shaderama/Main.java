@@ -23,7 +23,6 @@ public final class Main {
 		Core core = new Core("lwjgl");
 		core.start();
 		
-		//TODO: fill in models/shaders
 		System.out.println("Loading Scene.");
 		
 		//load mesh
