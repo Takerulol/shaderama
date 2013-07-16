@@ -26,17 +26,21 @@ public final class Main {
 		//TODO: fill in models/shaders
 		System.out.println("Loading Scene.");
 		
-		
+		//load mesh
 		Mesh m1 = ObjLoader.load(ResourceLoader.getResource("model/test.obj"));
 		
+		//load shader
 		File vs = ResourceLoader.getResource("shader/lambert.vs.glsl");
 		File fs = ResourceLoader.getResource("shader/lambert.fs.glsl");
 		Shader s1 = ShaderLoader.loadFromFile(vs, fs);
 		
+		//set shader and add mesh to the scene
 		m1.setShader(s1);
-		
 		core.getRenderManager().addNode(m1);
-
+		
+		//extra scene object
+//		Mesh m2 = ObjLoader.load(ResourceLoader.getResource("model/cube.obj"));
+//		core.getRenderManager().addNode(m2);
 	}
 
 }

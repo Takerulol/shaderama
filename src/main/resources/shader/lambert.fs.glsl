@@ -1,19 +1,22 @@
-uniform sampler2D sampler01;
-
 varying vec3 N;
 varying vec3 L;
-varying vec4 C;
+varying vec4 P;
 
 void main()
 { 
-    //float lambert = max(0.0, dot(normalize(L),normalize(N)));
-    //gl_FragColor = texture2D(sampler01, (gl_TexCoord[0].st));
     
-    float lambert = dot(normalize(L),normalize(N));
-    
-    vec3 colorTemp = vec3(1.0,1.0,1.0) * lambert;
+    //lambert with white scene
+    float lambert = max(0.0,dot(normalize(L),normalize(N)));
+    vec3 colorTemp = vec3(1.0,1.0,1.0) * lambert; 
     gl_FragColor = vec4(colorTemp,1.0);
-    //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    
+    //Color from positions
+    //gl_FragColor = (normalize(P) / 2 + 0.5) * lambert;
+    //gl_FragColor = normalize(P);
+    
+    //Color from normals
+    //gl_FragColor = vec4(N.r/2+0.5,N.g/2+0.5,N.b/2+0.5,1.0);
+    
     //gl_FragColor = gl_Color;
 
 }
